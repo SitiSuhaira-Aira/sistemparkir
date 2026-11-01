@@ -1,23 +1,23 @@
 package com.mycompany.sistemparkir;
 
-public class KendaraanParkir {
-    // Enkapsulasi: private field
+public abstract class KendaraanParkir {
     private String platNomor;
     private String pemilik;
     private int jamMasuk;
 
-    // Variabel Static (milik bersama class)
     public static int totalKendaraanParkir = 0;
 
-    // Constructor menggunakan this
-    public KendaraanParkir(String platNomor, String pemilik, int jamMasuk) {
+    // Menggunakan 'throws Exception' pada constructor
+    public KendaraanParkir(String platNomor, String pemilik, int jamMasuk) throws Exception {
+        if (jamMasuk < 0 || jamMasuk > 24) {
+            throw new Exception("Jam masuk tidak valid! Harus berada di antara rentang 0 sampai 24.");
+        }
         this.platNomor = platNomor;
         this.pemilik = pemilik;
         this.jamMasuk = jamMasuk;
-        totalKendaraanParkir++; // Increment counter static
+        totalKendaraanParkir++;
     }
 
-    // Getter dan Setter
     public String getPlatNomor() {
         return this.platNomor;
     }
@@ -39,22 +39,18 @@ public class KendaraanParkir {
     }
 
     public void setJamMasuk(int jamMasuk) {
-        if (jamMasuk >= 0 && jamMasuk <= 24) {
-            this.jamMasuk = jamMasuk;
-        } else {
-            System.out.println("Jam masuk tidak valid!");
-        }
+        this.jamMasuk = jamMasuk;
     }
 
-    // Method dasar untuk info
     public void tampilkanInfo() {
         System.out.printf("Plat: %-10s | Pemilik: %-15s | Masuk: %02d:00%n", this.platNomor, this.pemilik, this.jamMasuk);
     }
 
-    // Method dasar hitung tarif (akan di-override)
     public void hitungTarif(int jamKeluar) {
         int durasi = jamKeluar - this.jamMasuk;
         if (durasi < 0) durasi += 24;
         System.out.println("Durasi parkir: " + durasi + " jam.");
     }
+
+    public abstract void hitungBiayaTambahan();
 }
