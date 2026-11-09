@@ -1,7 +1,11 @@
+com\mycompany\sistemparkir\AreaParkir.class
 com\mycompany\sistemparkir\Sistemparkir.class
 com\mycompany\sistemparkir\DapatAsuransi.class
 com\mycompany\sistemparkir\KendaraanRodaDua.class
+com\mycompany\sistemparkir\LokasiGate.class
+com\mycompany\sistemparkir\PemilikKendaraan.class
 com\mycompany\sistemparkir\KendaraanRodaEmpat.class
+com\mycompany\sistemparkir\TransaksiParkir.class
 com\mycompany\sistemparkir\KendaraanListrik.class
 com\mycompany\sistemparkir\KendaraanTidakDitemukanException.class
 com\mycompany\sistemparkir\DapatVoucherCuci.class
