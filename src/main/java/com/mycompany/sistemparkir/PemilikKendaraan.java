@@ -1,6 +1,10 @@
 package com.mycompany.sistemparkir;
 
-public class PemilikKendaraan {
+import java.io.Serializable;
+
+public class PemilikKendaraan implements Serializable {
+    private static final long serialVersionUID = 1L; // Pengaman identitas versi objek
+    
     private String idMember;
     private String nama;
 

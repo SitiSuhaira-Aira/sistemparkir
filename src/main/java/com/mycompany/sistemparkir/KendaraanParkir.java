@@ -1,13 +1,16 @@
 package com.mycompany.sistemparkir;
 
-public abstract class KendaraanParkir {
+import java.io.Serializable;
+
+public abstract class KendaraanParkir implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String platNomor;
     private String pemilik;
     private int jamMasuk;
 
     public static int totalKendaraanParkir = 0;
 
-    // Menggunakan 'throws Exception' pada constructor
     public KendaraanParkir(String platNomor, String pemilik, int jamMasuk) throws Exception {
         if (jamMasuk < 0 || jamMasuk > 24) {
             throw new Exception("Jam masuk tidak valid! Harus berada di antara rentang 0 sampai 24.");

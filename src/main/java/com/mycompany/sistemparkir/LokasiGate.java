@@ -1,6 +1,10 @@
 package com.mycompany.sistemparkir;
 
-public class LokasiGate {
+import java.io.Serializable;
+
+public class LokasiGate implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
     private String namaGate;
     private String zonaKampus;
 

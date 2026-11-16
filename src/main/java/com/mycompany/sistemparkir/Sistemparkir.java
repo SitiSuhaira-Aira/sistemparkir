@@ -23,14 +23,16 @@ public class Sistemparkir {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        // Instansiasi Kelas Induk Pengelola yang Menerapkan Composition & Aggregation
         AreaParkir areaUnila = new AreaParkir("Area Parkir Utama Unila", "Gate 1 Rektorat", "Zona A");
         areaUnila.bukaAreaParkir();
+
+        // DEMO DESERIALIZATION: Memuat data secara otomatis dari file .dat saat awal program berjalan[cite: 10]
+        areaUnila.muatDataDariFile();
 
         boolean isRunning = true;
 
         System.out.println("==========================================================");
-        System.out.println("   SISTEM PARKIR KAMPUS - MODUL 10 (RELASI ANTAR-OBJEK)   ");
+        System.out.println("   SISTEM PARKIR KAMPUS - MODUL 11 (FILE I/O & SERIALIZE) ");
         System.out.println("==========================================================");
 
         while (isRunning) {
@@ -39,9 +41,10 @@ public class Sistemparkir {
             System.out.println("2. Lihat Daftar Kendaraan & Simulasi Tarif");
             System.out.println("3. Cari Kendaraan (Custom Exception)");
             System.out.println("4. Manajemen Data Pemilik (HashMap)");
-            System.out.println("5. Simulasi Transaksi Parkir Masuk (Demo Association)");
-            System.out.println("6. Keluar");
-            System.out.print("Pilih Menu (1-6): ");
+            System.out.println("5. Simulasi Transaksi Parkir Masuk (Association & File I/O Write)");
+            System.out.println("6. Baca File Log Transaksi (File I/O Read)");
+            System.out.println("7. Simpan & Keluar (Serialization)");
+            System.out.print("Pilih Menu (1-7): ");
 
             try {
                 int pilihan = scanner.nextInt();
@@ -130,7 +133,7 @@ public class Sistemparkir {
                         break;
 
                     case 4:
-                        System.out.println("\n--- Manajemen Data Pemilik (Aggregation / HashMap) ---");
+                        System.out.println("\n--- Manajemen Data Pemilik (HashMap) ---");
                         System.out.println("1. Tambah Pemilik Baru");
                         System.out.println("2. Cari Pemilik via ID");
                         System.out.println("3. Tampilkan Semua Pemilik");
@@ -157,7 +160,7 @@ public class Sistemparkir {
                         break;
 
                     case 5:
-                        System.out.println("\n--- Sistem Peminjaman / Transaksi Parkir (Demo Association) ---");
+                        System.out.println("\n--- Sistem Transaksi Parkir Masuk (Association & File I/O) ---");
                         System.out.print("Masukkan ID Member Pemilik: ");
                         String inputId = scanner.nextLine();
                         PemilikKendaraan p = areaUnila.getPemilik(inputId);
@@ -174,7 +177,6 @@ public class Sistemparkir {
 
                             if (idx >= 0 && idx < areaUnila.getJumlahKendaraan()) {
                                 KendaraanParkir k = areaUnila.getKendaraanInt(idx);
-                                // Menjalankan Relasi Asosiasi antara PemilikKendaraan dan KendaraanParkir
                                 TransaksiParkir.prosesParkirMasuk(p, k);
                             } else {
                                 System.out.println("Nomor kendaraan tidak valid!");
@@ -185,12 +187,22 @@ public class Sistemparkir {
                         break;
 
                     case 6:
+                        // DEMO FILE I/O READ: Membaca file log teks (.txt)
+                        areaUnila.bacaLogTransaksi();
+                        System.out.print("\nTekan Enter untuk melanjutkan...");
+                        scanner.nextLine();
+                        break;
+
+                    case 7:
+                        System.out.println("Menyimpan sesi ke penyimpanan internal...");
+                        // DEMO SERIALIZATION: Membekukan seluruh data memori ke file sebelum aplikasi ditutup[cite: 10]
+                        areaUnila.simpanDataKeFile();
                         System.out.println("Terima kasih telah menggunakan Sistem Parkir Kampus!");
                         isRunning = false;
                         break;
 
                     default:
-                        System.out.println("Pilihan menu utama tidak valid (1-6).");
+                        System.out.println("Pilihan menu utama tidak valid (1-7).");
                         break;
                 }
 
